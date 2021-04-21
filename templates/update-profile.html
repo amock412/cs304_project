@@ -1,0 +1,34 @@
+<!-- update-profile.html 
+  page that allows a user to update their own profile
+ -->
+
+ {% extends "logged-in-base.html" %}
+
+ {% block main_content %}
+ <div class="update-profile">
+   <h1>Music Share</h1>
+   <h2>Update your personal profile </h2>
+ 
+   <form method=POST action="{{ url_for('update_profile', uid= session['user_id'] )}}">
+     <table>
+       <tr>
+         <td><label for="name">Name</label></td>
+         <td><input id="name" type="text" name='name' value="{{user['name']}}"></td>
+       </tr>
+       <tr>
+         <td><label for="email">Email</label></td>
+         <td><input id="email" type="text" name='email' value="{{user['email']}}" required></td>
+       </tr>
+       <tr>
+         <td><label for="description">Description</label></td>
+         <td><textarea id="description" class='description' rows="4" cols="40" name='description' placeholder="Add a description to your profile">
+ 
+             </textarea></td>
+       </tr>
+     </table>
+     <input type="submit" name="submit" value="update">
+   </form>
+   <a class="button" href="{{ url_for('user', uid= session['user_id'] )}}">Cancel</a>
+ 
+ </div>
+ {% endblock %}

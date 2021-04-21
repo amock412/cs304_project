@@ -1,43 +1,59 @@
-<!doctype html>
-<html lang='en'>
-<head>
-    <meta charset='utf-8'>
-    <!-- for mobile-friendly pages -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name=author content="">
-    <title>{{ page_title }}</title>
-    <link rel='stylesheet' href="{{url_for('static', filename = 'style.css')}}">
-    {% block head_stuff %} {% endblock %}
-</head>
-<body>
+<!-- base.html 
+  base template used for creating other pages
+ -->
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<div id="messages">
-  {% for msg in messages %}
-  <p>{{msg}}</p>
-  {% endfor %}
-</div>
-{% endif %}
-{% endwith %}
-            
-{% block nav %}
-<nav>
-  <ul>
-    <li><a href="{{url_for('index')}}">home</a></li>
-    <li><a href="{{url_for('greet')}}">greet</a></li>
-    <li><a href="{{url_for('testform')}}">testform</a></li>
-  </ul>
-</nav>
-{% endblock %}
-
-{% block main_content %}
-<h1>Welcome!</h1>
-{% endblock %}
-
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  {% block end_scripts %}
-  {% endblock %}
-  
-</body>
-</html>
+ <!doctype html>
+ <html lang='en'>
+ 
+ <head>
+   <meta charset='utf-8'>
+   <meta name=author content="Andrea Mock">
+   <title>{{ title }}</title>
+   <link rel='stylesheet' href="{{url_for('static', filename = 'style.css')}}">
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" type="text/css">
+ 
+   <!-- favicon -->
+   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+ </head>
+ 
+ <body>
+   {% block nav_content %}
+   <header>
+     <a href="{{ url_for('index') }}" class="logo"><img src="{{url_for('static', filename = 'logo.jpeg')}}" alt="logo"></a>
+     <nav class="navigation" id="nav_content">
+       <ul>
+         <li><a href="{{ url_for('index') }}">Home</a></li>
+         <li><a href="{{ url_for('login') }}">Login</a></li>
+         <li><a href="{{ url_for('register') }}">Register</a></li>
+       </ul>
+     </nav>
+   </header>
+   {% endblock %}
+ 
+   {% with messages = get_flashed_messages() %}
+   {% if messages %}
+   <div id="flashes">
+     {% for msg in messages %}
+     <p>{{msg}}</p>
+     {% endfor %}
+   </div>
+   {% endif %}
+   {% endwith %}
+ 
+ 
+ 
+ 
+   {% block main_content %}
+   {% endblock %}
+ 
+ 
+ 
+ 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   {% block end_scripts %}
+   {% endblock %}
+ 
+ </body>
+ 
+ </html>

@@ -1,0 +1,35 @@
+<!-- list.html 
+  page that displays the results of a search query
+ -->
+
+ {% extends "logged-in-base.html" %}
+
+ {% block main_content %}
+ 
+ <div class="query-results">
+ 
+   <p>{{type}} matching {{query}}:</p>
+ 
+   {% if type == 'artists' %}
+   {% for artist in all_things %}
+   <p><a href="{{url_for('artistInfo',aid=artist['aid'])}}">{{artist['name']}}</a></p>
+   {% endfor %}
+   {% elif type == 'user' %}
+   {% for user in all_things %}
+   <p><a href="{{url_for('user',uid=user['user_id'])}}">{{user['username']}}</a></p>
+   {% endfor %}
+   {% else %}
+   {% for music in all_things %}
+   <p><a href="{{url_for('musicItem',mid=music['mid'])}}">{{music['title']}}</a></p>
+ 
+   {% endfor %}
+   {% endif %}
+ 
+   {% if type == 'user' %}
+   <p class="button"><a href="{{ url_for('all_users') }}">Head back to all users</a></p>
+   {% else %}
+   <p class="button"><a href="{{ url_for('all_music') }}">Head back to all music</a></p>
+   {% endif %}
+ 
+ </div>
+ {% endblock %}

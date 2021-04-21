@@ -1,0 +1,44 @@
+<!-- all-artists.html 
+  page that displays all of the artists in the database
+ -->
+
+{% extends "logged-in-base.html" %}
+
+{% block main_content %}
+<div class="artists-overview">
+   <h1>Artists</h1>
+   <h2>Check out all the artists and their works!
+   </h2>
+ 
+   <form class="search" method="GET" action="{{ url_for('artist_lookup')}}">
+     <p><label>search: <input type="text" required name="query"></label>
+       <input type="submit" value="search">
+     </p>
+   </form>
+ 
+   <div class="artists">
+     {% for artist in all_artists %}
+     <div class="artist">
+       <img src="{{url_for('userImage')}}" alt="artist icon">
+       <div class="artist_info">
+         <h4><b>{{artist['name']}}</b></h4>
+         <p><a href="{{url_for('artistInfo',aid=artist['aid'])}}">More Details</a></p>
+       </div>
+     </div>
+ 
+     {% endfor %}
+   </div>
+ 
+   <div class="users">
+     {% for user in all_users %}
+     <div class="user">
+       <img src="{{url_for('userImage')}}" alt="user icon">
+       <div class="user_info">
+         <h4><b>{{user['username']}}</b></h4>
+         <p><a href="{{url_for('user',uid=user['user_id'])}}">More Details</a></p>
+       </div>
+     </div>
+     {% endfor %}
+   </div>
+</div>
+{% endblock %}

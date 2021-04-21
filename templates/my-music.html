@@ -1,0 +1,31 @@
+<!-- my-music.html 
+  page that displays all of the music a user added to the 
+  database
+ -->
+
+ {% extends "logged-in-base.html" %}
+
+ {% block main_content %}
+ 
+ <main class="music-titles">
+   {% if noMusic %}
+   <div>
+     <p>You don't seem to have added any music yet <br> </p>
+     <p class="button"><a href="{{ url_for('upload') }}">Add music</a></p>
+   </div>
+   {% endif %}
+ 
+   {% for music in all_music %}
+   <div class="music-item" id="{{music['mid']}}">
+     <img src="{{url_for('pic',mid=music['mid'])}}" alt="{{music['mid']}}">
+     <div class="music-info">
+       <h3>{{music['title']}}</h3>
+       <p>Artist: <a href="{{ url_for('artistInfo', aid=music['aid']) }}">{{music['name']}}</a></p>
+       <p>Genre: {{music['genre']}}</p>
+       <p class="button"><a href="{{ url_for('musicItem', mid= music['mid']) }}">More details</a></p>
+     </div>
+ 
+   </div>
+   {% endfor %}
+ </main>
+ {% endblock %}

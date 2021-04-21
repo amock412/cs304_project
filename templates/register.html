@@ -1,0 +1,76 @@
+<!-- register.html 
+  page that allows user to register for an account
+ -->
+
+
+ {% extends "base.html" %}
+
+ {% block main_content %}
+ <div class="register">
+   <h1>Register</h1>
+   <form action="{{ url_for('register') }}" method="POST">
+     <table>
+       <tr>
+         <td><label for="username">Username:</label></td>
+         <td>
+           <input type="text" name="username" placeholder="Username" id="username" required>
+         </td>
+         <td></td>
+       </tr>
+       <tr>
+         <td><label for="password">Password:</label></td>
+         <td>
+           <input type="password" name="password" placeholder="Password" id="password" required>
+         </td>
+         <td><meter value=0 max="4" id="password-strength-meter"></meter>
+           <span id="password-strength-text"></span>
+         </td>
+       </tr>
+ 
+       <tr>
+         <td><label for="email">Email:</label></td>
+         <td><input type="email" name="email" placeholder="Email" id="email" required></td>
+         <td></td>
+       </tr>
+     </table>
+     <input type="submit" value="Register">
+   </form>
+ 
+ </div>
+ {% endblock %}
+ 
+ {% block end_scripts %}
+ <!-- import zxcvbn library from cdnjs that is used to assess password strength -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+ 
+ <script>
+   // inspired by https://css-tricks.com/password-strength-meter/
+   var passwordStrength = {
+     0: "Very weak",
+     1: "Weak",
+     2: "Ok",
+     3: "Strong",
+     4: "Very strong"
+   }
+ 
+   var password = document.getElementById('password');
+   var meter = document.getElementById('password-strength-meter');
+   var text = document.getElementById('password-strength-text');
+ 
+   password.addEventListener('input', function() {
+     var val = password.value;
+     var result = zxcvbn(val);
+ 
+     // Update the password strength meter
+     meter.value = result.score;
+ 
+     // Update the text indicator
+     if (val !== "") {
+       text.innerHTML = "Password Strength: " + passwordStrength[result.score];
+     } else {
+       text.innerHTML = "";
+     }
+   });
+ </script>
+ 
+ {% endblock %}

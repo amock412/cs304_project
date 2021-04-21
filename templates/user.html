@@ -1,0 +1,32 @@
+<!-- user.html 
+  page that displays a user's information
+ -->
+
+ {% extends "logged-in-base.html" %}
+
+ {% block main_content %}
+ <div class="user-profile">
+   <h1>Welcome to Music Share</h1>
+   <h2>User Profile</h2>
+   <div class='personal-card'>
+     {% if user['name'] %}
+     <p>Name: {{ user['name'] }}</p>
+     {% endif %}
+     <p>Username: {{ user['username'] }}</p>
+     <p>Email: {{ user['email'] }}</p>
+     {% if user['description'] %}
+     <p>Description: {{ user['description'] }}</p>
+     {% endif %}
+ 
+   </div>
+   {% if following %}
+   <p class="button"><a href="{{ url_for('unfollow_user', uid=user['user_id']) }}">Unfollow</a></p>
+   {% else %}
+   <p class="button"><a href="{{ url_for('follow_user', uid=user['user_id']) }}">Follow</a></p>
+   {% endif%}
+ 
+ 
+   <p class="button"><a href="{{ url_for('all_users') }}">View all users</a></p>
+ 
+ </div>
+ {% endblock %}

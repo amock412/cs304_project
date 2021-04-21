@@ -1,0 +1,31 @@
+<!-- music-item.html 
+  page that displays the details of a music item
+ -->
+
+ {% extends "logged-in-base.html" %}
+
+ {% block main_content %}
+ <div>
+   <h1>Music</h1>
+   <h2>{{music['title']}}</h2>
+ 
+   <p>Artist: <a href="{{url_for('artistInfo',aid=music['aid'])}}">{{music['name']}}</a></p>
+   <p>Genre: {{music['genre']}}</p>
+   {% if addedInfo %}
+   <p>Added by: <a href="{{url_for('user',uid=music['user_id'])}}">{{user}}</a></p>
+   {% endif %}
+   <p>Description: {{music['description']}}</p>
+ 
+   {% if music['user_id'] == session['user_id'] %}
+   <div class="button-actions">
+     <a href="{{ url_for('update_music', mid= music['mid'] )}}">Update entry</a>
+     <form class="delete-form" method="POST" action="{{ url_for('delete_music', mid=music['mid']) }}">
+       <input class="button" type="submit" name="deleteMusic" value="Delete music" onclick="return confirm('Are you sure that you want to permanently delete this music title?')">
+     </form>
+   </div>
+   {% endif %}
+ 
+   <p class="button"><a href="{{ url_for('all_music') }}">Head back to all music</a></p>
+ 
+ </div>
+ {% endblock %}

@@ -1,0 +1,21 @@
+<!-- artist-info.html 
+  page that displays  information about a 
+  particular artist
+ -->
+
+ {% extends "logged-in-base.html" %}
+
+ {% block main_content %}
+ <div>
+   <h1>Artist</h1>
+   <h2>{{artist['name']}}</h2>
+ 
+   <p>Works:</p>
+   {% for music in works%}
+   <p><a href="{{ url_for('musicItem', mid=music['mid']) }}">{{music['title']}}</a></p>
+   {% endfor %}
+ 
+   <p class="button"><a href="{{ url_for('all_artists') }}">Head to all artists</a></p>
+ 
+ </div>
+ {% endblock %}

@@ -1,0 +1,45 @@
+<!-- home.html 
+  home page that is displayed once user is loggedin 
+ -->
+
+ {% extends "logged-in-base.html" %}
+
+ {% block main_content %}
+ <div>
+   <h1>Music Share</h1>
+   <h2>A collaborative music sharing platform</h2>
+   <p>Music Share allows you to share your favorite music with other users and discover
+     what others are listening to.
+   </p>
+ </div>
+ 
+ <div>
+   <div class="options">
+     <h3>All Music</h3>
+     <p>Curious to see what other users are sharing and listening to?
+       Check out the newest music that other users have added to our ever expanding database!
+     </p>
+     <p class="button"><a href="{{ url_for('all_music') }}">View all music</a></p>
+ 
+   </div>
+ 
+   <div class="options">
+     <h3>All Artists</h3>
+     <p>Want to see what new artists have been added to our platform? Check
+       out all the artists and their works!
+     </p>
+     <p class="button"><a href="{{ url_for('all_artists') }}">View all artists</a></p>
+ 
+   </div>
+ 
+   <div class="options">
+     <h3>Users</h3>
+     <p>Music Share is there to help you share music with friends and other like-minded individuals.
+       Curious to see if your friends or favorite artists have joined yet? Check out all the users
+       on our platform!
+     </p>
+     <p class="button"><a href="{{ url_for('all_users') }}">Check out our users</a></p>
+ 
+   </div>
+ </div>
+ {% endblock %}

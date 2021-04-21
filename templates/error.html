@@ -1,0 +1,14 @@
+<!-- error.html 
+  page that is displayed when a user tries to 
+  access a route that does not exist
+ -->
+
+{% extends "logged-in-base.html" %}
+
+{% block main_content %}
+
+<h1>404 Page Not Found</h1>
+
+<h2>Head back to <a href="{{ url_for('home') }}">home page</a></h2>
+
+{% endblock %}

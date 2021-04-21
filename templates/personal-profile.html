@@ -1,0 +1,47 @@
+<!-- personal-profile.html 
+  page that displays a users personal profile
+ -->
+
+ {% extends "logged-in-base.html" %}
+
+ {% block main_content %}
+ <div class="my-profile">
+   <h1>Music Share</h1>
+   <h2>Personal Profile</h2>
+   <div class='personal-card'>
+     {% if user['name'] %}
+     <p>Name: {{ user['name'] }}</p>
+     {% endif %}
+     <p>Username: {{ user['username'] }}</p>
+     <p>Email: {{ user['email'] }}</p>
+     {% if user['name'] %}
+     <p>Description: {{ user['description'] }}</p>
+     {% else %}
+     <p>Description: <strong>Add a description to your profile!</strong></p>
+     {% endif %}
+ 
+   </div>
+ 
+   <div class='following'>
+     {% if follow %}
+     <h3>You are currently following:</h3>
+ 
+     {% for followee in follow %}
+     <p><a href="{{url_for('user',uid=followee['user_id'])}}">{{followee['username']}}</a></p>
+     {% endfor %}
+ 
+     {% else %}
+     <p>You are currently not following anyone. Check out other users to follow:</p>
+     <p class="button">
+       <a href="{{ url_for('all_users' )}}">All users</a>
+     </p>
+     {% endif %}
+   </div>
+   <div class="button-actions">
+     <p class="button"><a href="{{ url_for('update_profile', uid= session['user_id'] )}}">Update account</a></p>
+     <form class="delete-form" method="POST" action="{{ url_for('delete_account') }}">
+       <input class="button" type="submit" name="deleteAccount" value="Delete account" onclick="return confirm('Are you sure that you want to permanently delete your account?')">
+     </form>
+   </div>
+ </div>
+ {% endblock %}

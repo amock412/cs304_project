@@ -1,0 +1,20 @@
+<!-- logged-in-base.html 
+  base template for pages displayed when user is loggedin
+ -->
+
+ {% extends "base.html" %}
+
+ {% block nav_content %}
+ <header>
+   <a href="{{ url_for('home') }}" class='logo'><img src="{{url_for('static', filename = 'logo.jpeg')}}" alt="logo"></a>
+   <nav class="navigation">
+     <ul>
+       <li><a href="{{ url_for('home') }}">Home</a></li>
+       <li><a href="{{ url_for('upload') }}">Upload Music</a></li>
+       <li><a href="{{ url_for('my_music') }}">My Music</a></li>
+       <li><a href="{{ url_for('user', uid=session['user_id']) }}">My account</a></li>
+       <li><a href="{{ url_for('logout') }}">Logout</a></li>
+     </ul>
+   </nav>
+ </header>
+ {% endblock %}

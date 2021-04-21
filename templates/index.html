@@ -1,0 +1,63 @@
+<!-- index.html 
+  page that is displayed when flask app is started
+ -->
+
+ {% extends "base.html" %}
+
+ {% block main_content %}
+ <div class="welcome">
+   <h1>Welcome to Music Share</h1>
+   <h2>Here you can share and view music titles that other users share with you. </h2>
+ 
+ 
+   <h3>Check out what our users are saying:</h3>
+ 
+   <div id="slideshow-container">
+ 
+     <!-- user testimonials -->
+     <div class="testimonial">
+       <q>I love the variety of music found on MusicShare. I have really expanded my horizon!</q>
+       <p class="author">- Fred</p>
+     </div>
+ 
+     <div class="testimonial">
+       <q>Love the easiness of sharing music with friends. I am always up-to-date when it comes
+         to what my friends are listening to!</q>
+       <p class="author">- Harry</p>
+     </div>
+ 
+     <div class="testimonial">
+       <q>MusicShare has introduced me to new tastes!</q>
+       <p class="author">- Alice</p>
+     </div>
+     <div class="testimonial">
+       <q>It is so fun to share music with others and I have discovered some really cool artist thanks
+         to MusicShare. Highly recommend joining this awesome community!</q>
+       <p class="author">- Rodney</p>
+     </div>
+   </div>
+  </div>
+ 
+ 
+   {% endblock %}
+ 
+   {% block end_scripts %}
+   <script>
+     var slideIndex = 0;
+     carousel();
+      // code for slideshow from https://www.w3schools.com/howto/howto_js_slideshow.asp
+     function carousel() {
+       var i;
+       var x = document.getElementsByClassName("testimonial");
+       for (i = 0; i < x.length; i++) {
+         x[i].style.display = "none";
+       }
+       slideIndex++;
+       if (slideIndex > x.length) {
+         slideIndex = 1
+       }
+       x[slideIndex - 1].style.display = "block";
+       setTimeout(carousel, 4500); // Change image every 4.5 seconds
+     }
+   </script>
+   {% endblock %}

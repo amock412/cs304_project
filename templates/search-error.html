@@ -1,0 +1,26 @@
+<!-- search-error.html 
+  if a users query yields no results 
+  this page is displayed
+ -->
+
+ {% extends "logged-in-base.html" %}
+
+ {% block main_content %}
+ 
+ <h1>Not Found</h1>
+ 
+ {% if type %}
+ <p>Sorry, no {{type}} found</p>
+ {% else %}
+ <p>Sorry, no {{thing}} with that ID is in the database</p>
+ {% endif %}
+ 
+ {% if type == 'user' %}
+ <p class="button"><a href="{{ url_for('all_users') }}">Head to all users</a></p>
+ {% elif type == 'artists' %}
+ <p class="button"><a href="{{ url_for('all_artists') }}">Head to all artists</a></p>
+ {% else %}
+ <p class="button"><a href="{{ url_for('all_music') }}">Head to all music</a></p>
+ {% endif %}
+ 
+ {% endblock %}
