@@ -1,1 +1,1 @@
-My personal project
+CS304 Project - MusicShare
